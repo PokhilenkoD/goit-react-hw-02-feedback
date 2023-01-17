@@ -1,9 +1,10 @@
+import { SectionTitle } from 'components/SectionTitile/SectionTitle';
 import { Component } from 'react';
 
 export class App extends Component {
   static defaultProps = {
     title: 'Please leave feedback',
-    subtitle: 'Statistics',
+    subTitle: 'Statistics',
   };
 
   state = {
@@ -33,33 +34,23 @@ export class App extends Component {
   };
 
   render() {
-    const { title, subtitle } = this.props;
+    const { title, subTitle } = this.props;
     const { good, neutral, bad } = this.state;
     const totalFeedback = this.countTotalFeedback();
     const goodsFeedback = this.countPositiveFeedbackPercentage();
 
     return (
       <div>
-        <h1>{title}</h1>
-        <ul>
-          <li>
-            <button onClick={this.countFeedback}>Good</button>
-          </li>
-          <li>
-            <button onClick={this.countFeedback}>Neutral</button>
-          </li>
-          <li>
-            <button onClick={this.countFeedback}>Bad</button>
-          </li>
-        </ul>
-        <h2>{subtitle}</h2>
-        <ul>
-          <li>Good:{good}</li>
-          <li>Neutral:{neutral}</li>
-          <li>Bad:{bad}</li>
-          <li>Total:{totalFeedback}</li>
-          <li>Positive feedback:{goodsFeedback ? goodsFeedback : 0}%</li>
-        </ul>
+        <SectionTitle
+          title={title}
+          countFeedback={this.countFeedback}
+          subTitle={subTitle}
+          good={good}
+          neutral={neutral}
+          bad={bad}
+          totalFeedback={totalFeedback}
+          goodsFeedback={goodsFeedback}
+        />
       </div>
     );
   }
