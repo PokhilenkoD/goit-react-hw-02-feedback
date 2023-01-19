@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
 import { Notification } from 'components/Notification/Notification';
 import { Statistics } from 'components/Statistics/Statistics';
@@ -31,3 +32,8 @@ export const SectionTitle = ({
     </div>
   );
 };
+
+SectionTitle.propTypes = {
+  title: PropTypes.string,
+  subTitle: PropTypes.string,
+}

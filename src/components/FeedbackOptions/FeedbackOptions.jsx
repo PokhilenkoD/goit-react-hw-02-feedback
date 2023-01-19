@@ -1,4 +1,6 @@
-export const FeedbackOptions = ({countFeedback}) => {
+import PropTypes from 'prop-types';
+
+export const FeedbackOptions = ({ countFeedback }) => {
   return (
     <ul>
       <li>
@@ -13,3 +15,5 @@ export const FeedbackOptions = ({countFeedback}) => {
     </ul>
   );
 };
+
+FeedbackOptions.propTypes = { countFeedback: PropTypes.func.isRequired };
