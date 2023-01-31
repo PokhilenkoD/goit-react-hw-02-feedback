@@ -1,5 +1,8 @@
+import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
 import { SectionTitle } from 'components/SectionTitile/SectionTitle';
+import { Statistics } from 'components/Statistics/Statistics';
 import { Component } from 'react';
+import { Notification } from 'components/Notification/Notification';
 
 export class App extends Component {
   static defaultProps = {
@@ -15,10 +18,10 @@ export class App extends Component {
 
   countFeedback = ev => {
     this.setState(prevState => {
-      const value = Object.keys(this.state).find(
-        state => state === ev.target.textContent.toLowerCase()
-      );
-      return { [value]: prevState[value] + 1 };
+      const value = ev.target.textContent.toLowerCase();
+      return {
+        [value]: prevState[value] + 1,
+      };
     });
   };
 
@@ -38,19 +41,28 @@ export class App extends Component {
     const { good, neutral, bad } = this.state;
     const totalFeedback = this.countTotalFeedback();
     const goodsFeedback = this.countPositiveFeedbackPercentage();
+    const arrayOptions = Object.keys(this.state);
 
     return (
       <div>
-        <SectionTitle
-          title={title}
-          countFeedback={this.countFeedback}
-          subTitle={subTitle}
-          good={good}
-          neutral={neutral}
-          bad={bad}
-          totalFeedback={totalFeedback}
-          goodsFeedback={goodsFeedback}
-        />
+        <SectionTitle title={title}>
+          <FeedbackOptions
+            options={arrayOptions}
+            countFeedback={this.countFeedback}
+          />
+          {totalFeedback ? (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              totalFeedback={totalFeedback}
+              goodsFeedback={goodsFeedback}
+              subTitle={subTitle}
+            />
+          ) : (
+            <Notification message="There is no feedback" />
+          )}
+        </SectionTitle>
       </div>
     );
   }

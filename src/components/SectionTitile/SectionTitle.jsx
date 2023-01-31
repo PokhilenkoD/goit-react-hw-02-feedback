@@ -1,39 +1,14 @@
 import PropTypes from 'prop-types';
-import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
-import { Notification } from 'components/Notification/Notification';
-import { Statistics } from 'components/Statistics/Statistics';
 
-export const SectionTitle = ({
-  title,
-  countFeedback,
-  subTitle,
-  good,
-  neutral,
-  bad,
-  totalFeedback,
-  goodsFeedback,
-}) => {
+export const SectionTitle = ({ title, children }) => {
   return (
     <div>
       <h1>{title}</h1>
-      <FeedbackOptions countFeedback={countFeedback} />
-      <h2>{subTitle}</h2>
-      {totalFeedback ? (
-        <Statistics
-          good={good}
-          neutral={neutral}
-          bad={bad}
-          totalFeedback={totalFeedback}
-          goodsFeedback={goodsFeedback}
-        />
-      ) : (
-        <Notification message="There is no feedback" />
-      )}
+      {children}
     </div>
   );
 };
 
 SectionTitle.propTypes = {
   title: PropTypes.string,
-  subTitle: PropTypes.string,
-}
+};

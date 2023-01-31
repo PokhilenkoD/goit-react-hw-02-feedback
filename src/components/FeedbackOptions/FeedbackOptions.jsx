@@ -1,19 +1,22 @@
 import PropTypes from 'prop-types';
 
-export const FeedbackOptions = ({ countFeedback }) => {
+export const FeedbackOptions = ({ countFeedback, options }) => {
   return (
     <ul>
-      <li>
-        <button onClick={countFeedback}>Good</button>
-      </li>
-      <li>
-        <button onClick={countFeedback}>Neutral</button>
-      </li>
-      <li>
-        <button onClick={countFeedback}>Bad</button>
-      </li>
+      {options.map(option => {
+        return (
+          <li key={option}>
+            <button type="button" onClick={countFeedback}>
+              {option}
+            </button>
+          </li>
+        );
+      })}
     </ul>
   );
 };
 
-FeedbackOptions.propTypes = { countFeedback: PropTypes.func.isRequired };
+FeedbackOptions.propTypes = {
+  countFeedback: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
+};
